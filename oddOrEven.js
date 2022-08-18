@@ -20,9 +20,7 @@ function oddOrEven(array) {
    const sum = array.reduce((accumulator, value) => {
      return accumulator + value;
    }, 0)
-   if(array === null || array === 0) {
-     array = [0];
-   }
+
    if(sum % 2 === 0) {
      return 'even';
    } else {

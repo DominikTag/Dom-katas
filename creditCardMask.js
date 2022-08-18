@@ -21,5 +21,5 @@ function maskify(cc) {
       result.push(arrayCc[i]);
     }
   }
-  return result.toString().replace(/,/g, '');
+  return result.join('');
 }

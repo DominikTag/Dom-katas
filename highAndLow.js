@@ -19,10 +19,8 @@ function highAndLow(numbers){
     return Number(string);
   })
   
-  let finalArray = arrayOfNumbers.sort((a, b) => {return a - b});
-  
-  let smallestNumber = finalArray[0];
-  let biggestNumber = finalArray[finalArray.length - 1];
-  
+  const biggestNumber = Math.max.apply(null, arrayOfNumbers);
+  const smallestNumber = Math.min.apply(null, arrayOfNumbers);
+
   return `${biggestNumber} ${smallestNumber}`;
 }

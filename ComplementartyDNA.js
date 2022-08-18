@@ -14,22 +14,19 @@ Example: (input --> output)
 */
 
 function DNAStrand(dna){
-  let arrOfDna = dna.split("");
+  const arrOfDna = dna.split("");
   let arrOfChangedDna = [];
+  const replacements = {
+    A: 'T',
+    T: 'A',
+    C: 'G',
+    G: 'C'
+  }
+
   arrOfDna.forEach(element => {
-    
-    if (element === 'A') {
-      arrOfChangedDna.push('T');
-      
-    } else if(element === 'T') {
-      arrOfChangedDna.push('A');
-      
-    } else if(element === 'C') {
-      arrOfChangedDna.push('G');
-      
-    } else if(element === 'G') {
-      arrOfChangedDna.push('C');
+    if(replacements[element]) {
+      arrOfChangedDna.push(replacements[element]);
     }
   })
-  return arrOfChangedDna.toString().replace(/,/g, "");
+  return arrOfChangedDna.join('');
 }

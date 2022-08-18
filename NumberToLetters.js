@@ -7,14 +7,10 @@ All inputs will be valid.
 function switcher(x){
   const alphabet = [' ', '?', '!', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
   const reversedAlphabet = alphabet.reverse();
-  let arrOfNum = x.map(str => {
-    return Number(str) - 1;
+
+  let result = x.map(str => {
+    return reversedAlphabet[Number(str) - 1];
   })
-  let result = "";
-  
-  arrOfNum.forEach(element => {
-    result += reversedAlphabet[element];
-  })
-  
-  return result;
+    
+  return result.join('');
 }
