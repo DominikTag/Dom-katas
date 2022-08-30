@@ -11,13 +11,6 @@ Examples: (Input --> Output)
 ["a", "b", "c"] --> ["1: a", "2: b", "3: c"]
 */
 
-const number = function(array){
-    let count = 0;
-    let result = [];
-   
-    array.forEach(element => {
-      count++;
-      result.push(`${count}: ${element}`)
-    })
-    return result;
+const addLineNumbers = (array) => {
+    return array.map(((el, i) => `${i + 1}: ${el}`));
 }  
