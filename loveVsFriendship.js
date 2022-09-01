@@ -16,14 +16,10 @@ function wordsToScore(string){
     const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
     let stringToArray = string.split('');
     let indexes = [];
-    
-    stringToArray.forEach(element => {
-      indexes.push(alphabet.indexOf(element));
+
+    stringToArray.map(element => {
+        indexes.push(alphabet.indexOf(element) + 1);
     })
     
-    const score = indexes.map(element => {
-      return element + 1;
-    })
-    
-    return score.reduce((a, b) => a + b, 0);
+    return indexes.reduce((a, b) => a + b, 0);
 }

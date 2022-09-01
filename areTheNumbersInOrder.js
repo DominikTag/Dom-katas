@@ -20,14 +20,13 @@ function inAscOrder(arr) {
     let result;
     const sortedArray = [...arr].sort((a, b) => {return a - b});
     
-    if(arr.length === 0 || arr.length === 1) {
-      result = true;
+    if(arr.length <= 1) {
+      return true;
     }
     
     for(let i = 0; i < arr.length; i++) {
       if(arr[i] != sortedArray[i]) {
-        result = false;
-        break;
+        return false;
       } else {
         result = true;
       }
