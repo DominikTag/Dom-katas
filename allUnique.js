@@ -14,8 +14,8 @@ function hasUniqueChars(str){
         character = stringToArray[i];
 
         if(stringToArray.includes(character, i + 1)) {
-            countTheSameCharacters++;
+            return false;
         }
     }
-    return countTheSameCharacters === 0;
+    return true;
 }

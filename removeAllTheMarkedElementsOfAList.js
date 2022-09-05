@@ -10,13 +10,5 @@ Enjoy it!!
 */
 
 Array.prototype.remove_ = function(integer_list, values_list){
-    values_list.forEach(value => {
-        for(let i = 0; i < integer_list.length; i++) {
-            if(integer_list[i] === value) {
-                integer_list.splice(i, 1)
-                i--;   // fix the issue with skipping next item, because of change of the index after slicing
-            }
-        }
-    })
-    return integer_list;
-}
+    return integer_list.filter(element => !values_list.includes(element))
+};
