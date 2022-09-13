@@ -22,14 +22,14 @@ function countDays(d){
     if(todayAsNumericValue === dateToCompareAsNumericValue) {
         return 'Today is the day!';
         // counts the difference between requested date and today and divides it by miliseconds in one day, to get amount of days
-    } else if(todayAsNumericValue < dateToCompareAsNumericValue) {
+    }
+    if(todayAsNumericValue < dateToCompareAsNumericValue) {
         let result = Math.round((dateToCompareAsNumericValue - todayAsNumericValue) / oneDay);
         return `${result} days`;
         // handles a case, when today's date is provided as a parameter (e.g. September 6, 2022)
-    } else if(todayAsNumericValue > dateToCompareAsNumericValue && todayAsNumericValue - dateToCompareAsNumericValue < oneDay) {
-        return 'Today is the day!';
-
-    } else {
-        return 'The day is in the past!';
     }
+    if(todayAsNumericValue > dateToCompareAsNumericValue && todayAsNumericValue - dateToCompareAsNumericValue < oneDay) {
+        return 'Today is the day!';
+    }
+    return 'The day is in the past!';
 }

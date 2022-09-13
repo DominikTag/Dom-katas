@@ -43,7 +43,7 @@ function high(x) {
     // split string to array of words
     const arrayFromString = x.split(' ');
 
-    let nestedArrayOfLetters = [];
+    const nestedArrayOfLetters = [];
     let score = 0;
     let theBestScore = 0;
     let theBestWord = '';
