@@ -2,7 +2,7 @@
 Complete the method that takes a boolean value and return a "Yes" string for true, or a "No" string for false.
 */
 
-function boolToWord( bool ){
+const boolToWord = function( bool ){
     let result;
     if (bool) {
         result = 'Yes'
@@ -11,3 +11,5 @@ function boolToWord( bool ){
     }
     return result;
 }
+
+module.exports = { boolToWord };
