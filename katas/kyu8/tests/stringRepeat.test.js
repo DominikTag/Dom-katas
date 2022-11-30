@@ -1,5 +1,5 @@
 const { repeatStr } = require("../stringRepeat");
-const {  amountOfTests, randomString, randomAmount } = require('../tests/helpers/randomValues');
+const {  amountOfTests, randomString, randomAmount } = require('../../helpers/randomValues');
 
 describe("Test suite for a function, which repeat string n times", () => {
     test("Verify how function works for regular strings", async () => {

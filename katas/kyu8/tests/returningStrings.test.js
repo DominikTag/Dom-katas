@@ -1,5 +1,5 @@
 const { greet } = require("../returningStrings");
-const {  amountOfTests, randomString } = require('../tests/helpers/randomValues');
+const {  amountOfTests, randomString } = require('../../helpers/randomValues');
 
 describe("Test suite for greeting function", () => {
     test("Verify function for real names", async () => {
