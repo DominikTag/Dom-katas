@@ -11,9 +11,6 @@ countBy(2,5) === [2,4,6,8,10]
 */
 
 const countByX = function(x, n) {
-    if(typeof x !== 'number' || typeof n !== 'number') {
-        throw new Error("Function's parameters needs to be of type Number!")
-    }
 
     let z = [];
     for (let i = 1; i <= n; i++) {
@@ -21,6 +18,5 @@ const countByX = function(x, n) {
     }
     return z;
 }
-console.log(countByX(0, 0))
 
 module.exports = { countByX };

@@ -9,11 +9,11 @@ Example
 For input [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, -11, -12, -13, -14, -15], you should return [10, -65].
 */
 
-function countPositivesSumNegatives(input) {
+const countPositivesSumNegatives = function(input) {
     let countedPositiveNumbers = 0;
     let sumOfNegativeNumbers = 0;
 
-    if(input === null || input.length === 0) {
+    if(input === null || input === undefined || input.length === 0) {
         return [];
     } else {
         for(let i = 0; i < input.length; i++) {
@@ -21,8 +21,12 @@ function countPositivesSumNegatives(input) {
                 countedPositiveNumbers++;
             } else if(input[i] < 0) {
                 sumOfNegativeNumbers += input[i];
+            } else {
+                continue;
             }
         }
     }
     return [countedPositiveNumbers, sumOfNegativeNumbers]
 }
+
+module.exports = { countPositivesSumNegatives };

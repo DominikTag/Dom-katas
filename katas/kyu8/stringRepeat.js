@@ -6,7 +6,7 @@ Examples (input -> output)
 5, "Hello" -> "HelloHelloHelloHelloHello"
 */
 
-function repeatStr (n, s) {
+const repeatStr = function (n, s) {
     let result = '';
 
     for(let i = 0; i < n; i++) {
@@ -15,3 +15,5 @@ function repeatStr (n, s) {
 
     return result;
 }
+
+module.exports = { repeatStr };
