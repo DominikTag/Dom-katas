@@ -12,7 +12,11 @@ The input will always be in lowercase and never be empty.
 Create a function that returns the value of the word, based on its letters, as integer.
 */
 
-function wordsToScore(string){
+const wordsToScore = function (string){
+    if(typeof string !== 'string' || string.match(/\d+/)) {
+        return false;
+    }
+
     const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
     let stringToArray = string.split('');
     let indexes = [];
@@ -23,3 +27,5 @@ function wordsToScore(string){
     
     return indexes.reduce((a, b) => a + b, 0);
 }
+
+module.exports = { wordsToScore };

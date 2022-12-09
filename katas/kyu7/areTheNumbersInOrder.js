@@ -15,7 +15,11 @@ inAscOrder([9,8,7,6,5,4,3,2,1]); // returns false because the numbers are in DES
 N.B. If your solution passes all fixed tests but fails at the random tests, make sure you aren't mutating the input array.
 */
 
-function inAscOrder(arr) {
+const inAscOrder = function (arr) {
+
+    if(!Array.isArray(arr)) {
+        return false;
+    }
   
     let result;
     const sortedArray = [...arr].sort((a, b) => {return a - b});
@@ -33,3 +37,5 @@ function inAscOrder(arr) {
     }
     return result;
 }
+
+module.exports = { inAscOrder };

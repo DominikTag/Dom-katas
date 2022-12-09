@@ -20,7 +20,11 @@ Since the 3rd word is 'string'(starting from 0 remember) and the third parameter
 Simple. Good luck.
 */
 
-function modifyMultiply (str, loc, num) {
+const modifyMultiply = function (str, loc, num) {
+    if(typeof str !== 'string' || typeof loc !== 'number' || typeof num !== 'number') {
+        return false;
+    }
+
     const arrayFromString = str.split(' ');
     let result = [];
 
@@ -34,3 +38,5 @@ function modifyMultiply (str, loc, num) {
     }
     return result.join('');
 }
+
+module.exports = { modifyMultiply };

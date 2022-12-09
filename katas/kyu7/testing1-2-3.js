@@ -12,5 +12,19 @@ Examples: (Input --> Output)
 */
 
 const addLineNumbers = (array) => {
+    if(!Array.isArray(array)) {
+        return false;
+    }
+
+    if(!
+        array.every(element => {
+            return typeof element === 'string';
+        })
+    ) {
+        return false;
+    }
+
     return array.map(((el, i) => `${i + 1}: ${el}`));
-}  
+}
+
+module.exports = { addLineNumbers };

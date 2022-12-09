@@ -20,7 +20,11 @@ Explanation:
 The maximum product obtained from multiplying -2 * 7 = -14, and they're adjacent numbers in the array.
 */
 
-function adjacentElementsProduct(array) {
+const adjacentElementsProduct = function (array) {
+    if(!Array.isArray(array) || array.length < 2) {
+        return false;
+    }
+
     let result = [];
 
     for(let i = 0; i < array.length - 1; i++) {
@@ -28,3 +32,6 @@ function adjacentElementsProduct(array) {
     }
     return Math.max(...result);
 }
+
+
+module.exports = { adjacentElementsProduct };

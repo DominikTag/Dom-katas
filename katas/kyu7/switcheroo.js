@@ -8,7 +8,11 @@ Example:
 
 */
 
-function switcheroo(x){
+const switcheroo = function (x){
+    if(typeof x !== 'string' || (!/^[abc]+$/.test(x))) {
+        return false;
+    }
+
     const arrayFromString = x.split('');
     let changedArray = [];
     const replacements = {
@@ -24,3 +28,5 @@ function switcheroo(x){
     })
     return changedArray.join('');
 }
+
+module.exports = { switcheroo };
