@@ -1,6 +1,6 @@
 const { switcher } = require('../NumberToLetters');
 const { amountOfTests, arrayOfRandomStringNumbers, randomNumbersArray, randomAmount } = require('../../helpers/randomValues');
-const { alphabet, reversedAlphabet } = require('../../helpers/alphabetObject');
+const { alphabet, reversedAlphabetWithOtherChars, reversedAlphabet } = require('../../helpers/alphabetObject');
 describe("Test suite for a function, which is making a letter from a number in reversed order", () => {
     test("Verify how function works for other input types", async () => {
         expect(switcher('test')).toBeFalsy()
@@ -21,10 +21,10 @@ describe("Test suite for a function, which is making a letter from a number in r
     test("Verify how function works for proper random inputs", async () => {
         for(let i = 0; i < amountOfTests; i++) {
             const testArray = arrayOfRandomStringNumbers(randomNumbersArray(randomAmount(6)));
-            const revAlph = reversedAlphabet(alphabet);
+            const revAlphWithAdditionalChars = reversedAlphabetWithOtherChars(reversedAlphabet);
 
             const result = testArray.map(str => {
-                return revAlph[Number(str - 1)];
+                return revAlphWithAdditionalChars[Number(str - 1)];
             })
 
             expect(switcher(testArray)).toEqual(result.join(''))
