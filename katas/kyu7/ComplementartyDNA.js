@@ -13,7 +13,19 @@ Example: (input --> output)
 "GTAT" --> "CATA"
 */
 
-function DNAStrand(dna){
+const DNAStrand = function (dna){
+  const requiredLetters = ['A', 'T', 'G', 'C'];
+
+  if(typeof dna !== 'string') {
+    return false;
+  }
+
+  requiredLetters.forEach(letter => {
+    if(!dna.includes(letter)) {
+      return false;
+    }
+  })
+
   const arrOfDna = dna.split("");
   let arrOfChangedDna = [];
   const replacements = {
@@ -30,3 +42,5 @@ function DNAStrand(dna){
   })
   return arrOfChangedDna.join('');
 }
+
+module.exports = { DNAStrand };

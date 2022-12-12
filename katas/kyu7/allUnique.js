@@ -5,7 +5,7 @@ The string may contain any of the 128 ASCII characters. Characters are case-sens
 
 */
 
-function hasUniqueChars(str){
+const hasUniqueChars = function (str){
     const stringToArray = str.split('');
     let character;
     let countTheSameCharacters = 0;
@@ -19,3 +19,5 @@ function hasUniqueChars(str){
     }
     return true;
 }
+
+module.exports = { hasUniqueChars };

@@ -16,7 +16,19 @@ Input: [0, -1, -5]
 Output: "even"
 Have fun!
 */
-function oddOrEven(array) {
+const oddOrEven = function (array) {
+    if(!Array.isArray(array)) {
+        return false;
+    }
+
+    if(!
+        array.every(element => {
+            return typeof element === 'number';
+        })
+    ) {
+        return false;
+    }
+
    const sum = array.reduce((accumulator, value) => {
      return accumulator + value;
    }, 0)
@@ -27,3 +39,5 @@ function oddOrEven(array) {
      return 'odd';
    }
 }
+
+module.exports = { oddOrEven };

@@ -4,10 +4,15 @@ Write a function that can return the smallest value of an array or the index of 
 Assume the first parameter will always be an array filled with at least 1 number and no duplicates. Assume the second parameter will be a string holding one of two values: 'value' and 'index'.
 */
 
-function minValue(arr, toReturn) {
+const minValue = function(arr, toReturn) {
+    if(!(Array.isArray(arr)) || typeof toReturn !== 'string' || arr.length < 1) {
+        return false;
+    }
   
     if(toReturn === 'value') {
       return Math.min(...arr);
     }
       return arr.indexOf(Math.min(...arr));
 }
+
+module.exports = { minValue };

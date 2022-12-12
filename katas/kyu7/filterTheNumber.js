@@ -10,6 +10,10 @@ You will be given a string of numbers and letters mixed up, you have to return a
 */
 
 const filterString = function(value) {
+    if(typeof value !== 'string') {
+        return false;
+    }
+
     const arrayFromString = value.split('');
     const regex = /[0-9]/;
     let arrayWithNumbersAsStrings = [];
@@ -22,3 +26,5 @@ const filterString = function(value) {
 
     return Number(arrayWithNumbersAsStrings.join(''));
 }
+
+module.exports = { filterString };

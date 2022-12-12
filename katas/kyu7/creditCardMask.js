@@ -10,7 +10,18 @@ Examples
                 "" -->                 ""
 */
 
-function maskify(cc) {
+const maskify = function (cc) {
+
+  const regex = /[0-9]+/;
+
+  if(typeof cc !== 'string') {
+    return false;
+  }
+
+  if(!regex.test(cc)) {
+    return false;
+  }
+
   let arrayCc = cc.split("");
   let result = [];
   
@@ -23,3 +34,5 @@ function maskify(cc) {
   }
   return result.join('');
 }
+
+module.exports = { maskify };

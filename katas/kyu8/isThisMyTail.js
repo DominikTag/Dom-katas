@@ -6,13 +6,19 @@ If the tail is right return true, else return false.
 The arguments will always be non empty strings, and normal letters.
 */
 
-function correctTail(body, tail){
+const correctTail = function (body, tail) {
 
-    sub = body.substr(body.length-(tail.length));
+    if(typeof body !== 'string' || typeof tail !== 'string') {
+        throw new Error("Input must be of type string!")
+    }
 
-    if (sub === tail){
+    let sub = body[body.length - 1];
+
+    if (sub === tail) {
         return true;
     } else {
         return false;
     }
 };
+
+module.exports = { correctTail };

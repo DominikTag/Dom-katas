@@ -5,10 +5,16 @@ Complete the solution so that it reverses the string passed into it.
 'word'   =>  'drow'
 */
 
-function solution(str){
+const reversedString = function(str){
+    if(typeof str !== 'string') {
+        return '';
+    }
+
     let splitString = str.split("");
     let reversedString = splitString.reverse();
     let result = reversedString.join("");
 
     return result;
 }
+
+module.exports = { reversedString };

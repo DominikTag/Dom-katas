@@ -10,7 +10,7 @@ Example(Input --> Output)
 The input will not be 0.
 */
 
-function nthEven(n){
+const nthEven = function(n){
     let result;
     if(n === 0) {
         result = 0;
@@ -19,3 +19,5 @@ function nthEven(n){
     }
     return result;
 }
+
+module.exports = { nthEven };
