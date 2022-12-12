@@ -27,12 +27,21 @@ const alphabet = {
     z: 26,
 };
 
-const reversedAlphabet = (alphabetObj) => {
+// const reversedAlphabet = (alphabetObj) => {
+//
+//     const reversedKeys = Object.keys(alphabetObj).reverse();
+//
+//     reversedKeys.push('!', '?', '');
+//     return reversedKeys;
+// };
 
-    const reversedKeys = Object.keys(alphabetObj).reverse();
+const reversedAlphabet = Object.keys(alphabet).reverse();
 
-    reversedKeys.push('!', '?', '');
-    return reversedKeys;
-};
+const reversedAlphabetWithOtherChars = (sampleAlphabet) => {
+    const result = sampleAlphabet;
+    result.push('!', '?', '');
 
-module.exports = { alphabet, reversedAlphabet };
+    return result;
+}
+
+module.exports = { alphabet, reversedAlphabet, reversedAlphabetWithOtherChars };
