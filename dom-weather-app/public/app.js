@@ -3,7 +3,6 @@ const temperature = document.querySelector('.temperature');
 const dayOrNight = document.querySelector('.time');
 const conditions = document.querySelector('.conditions');
 const icon = document.querySelector('.weather-icon');
-const errorMessage = document.querySelector('#error');
 
 const apiKey = 'qGLMGbgG2tHUnaRGFoJIvHMul7t55Esr';
 
@@ -20,11 +19,13 @@ cityInput.addEventListener('keyup', () => {
 
 const getCity = async (inputValue) => {
 
-    const base = 'http://dataservice.accuweather.com/locations/v1/cities/search';
+    const base = 'http://dataservice.accather.com/locations/v1/cities/search';
     const query = `?apikey=${apiKey}&q=${inputValue}`;
 
     const response = await fetch(base + query)
-    .catch()
+    .catch(err => {
+        console.error(err);
+    })
     const data = await response.json();
 
     return getWeather(data[0].Key);
