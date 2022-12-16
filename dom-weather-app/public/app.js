@@ -1,92 +1,79 @@
 const cityInput = document.querySelector('#city-input');
 const temperature = document.querySelector('.temperature');
-const dayOrNight = document.querySelector('.time');
+const background = document.querySelector('.background');
 const conditions = document.querySelector('.conditions');
 const icon = document.querySelector('.weather-icon');
 
-const apiKey = 'qGLMGbgG2tHUnaRGFoJIvHMul7t55Esr';
-
+const apiKey = 'EPdJhXaeSuuAyzPqHlQcJboQyVosCoFQ';
 
 let timeout = null;
 
 cityInput.addEventListener('keyup', () => {
     clearTimeout(timeout);
 
-    timeout = setTimeout(function () {
-        getCity(cityInput.value);
+    timeout = setTimeout(async function () {
+        const cityDetails = await getCity(cityInput.value);
+        const weatherObject = await getWeather(cityDetails.cityID);
+        updateUI(weatherObject);
     }, 2000);
 })
 
-const getCity = async (inputValue) => {
+async function getCity (inputValue) {
 
-    const base = 'http://dataservice.accather.com/locations/v1/cities/search';
+    const base = 'http://dataservice.accuweather.com/locations/v1/cities/search';
     const query = `?apikey=${apiKey}&q=${inputValue}`;
 
     const response = await fetch(base + query)
-    .catch(err => {
-        console.error(err);
-    })
+        .catch(err => {
+            console.error(err);
+        })
     const data = await response.json();
 
-    return getWeather(data[0].Key);
+    return {cityID: data[0].Key};
+
 }
 
-const getWeather = async (cityKey) => {
-    const base = 'http://dataservice.accuweather.com/forecasts/v1/daily/1day/';
+async function getWeather (cityKey) {
+    const base = 'http://dataservice.accuweather.com/forecasts/v1/hourly/1hour/';
     const query = `${cityKey}?apikey=${apiKey}`;
-    
-    const response = await fetch(base + query);
-    const data = await response.json();
 
-    return updateUI(data);
+    const response = await fetch(base + query)
+        .catch(err => {
+            console.error(err);
+        });
+    const weatherData = await response.json();
+
+    return weatherData;
 }
 
-async function updateUI(weatherObject) {
-    // update day/night background
-    dayNight(whatHourIsIt());
-    const dayTime = dayNight(whatHourIsIt());
+function updateUI(weatherObject) {
+    changeBackground(weatherObject);
+    updateTemperature(weatherObject);
+    updateWeatherConditionsAndIcons(weatherObject);
+}
 
-    // update temperature
-    const maxTemp = weatherObject.DailyForecasts[0].Temperature.Maximum.Value;
-    const minTemp = weatherObject.DailyForecasts[0].Temperature.Minimum.Value;
-    let avgFahrenheit = (maxTemp + minTemp) / 2;
-    let avgFahrenheitNumber = parseFloat(avgFahrenheit);
-    let celsius = (Math.round(avgFahrenheitNumber - 32) / 1.8).toFixed(0);
-    
+function changeBackground (weatherObject) {
+    const isDay = weatherObject[0].IsDaylight;  // return true or false
+
+    if(isDay) {
+        background.setAttribute('src', 'images/day.svg');
+    } else {
+        background.setAttribute('src', 'images/night.svg');
+    }
+}
+
+function updateTemperature (weatherObject) {
+    let fahrenheitTemperature = parseFloat(weatherObject[0].Temperature.Value);
+    let celsius = (Math.round(fahrenheitTemperature - 32) / 1.8).toFixed(0);
+
     temperature.innerHTML = `${celsius}&deg;C`;
+}
 
-
-    
-    // update weather conditions and icons
+function updateWeatherConditionsAndIcons (weatherObject) {
     let iconFromWeatherApi;
 
-    if(dayTime === 'Day') {
-        conditions.innerHTML = weatherObject.DailyForecasts[0].Day.IconPhrase;
-        iconFromWeatherApi = weatherObject.DailyForecasts[0].Day.Icon;
-    } else {
-        conditions.innerHTML = weatherObject.DailyForecasts[0].Night.IconPhrase;
-        iconFromWeatherApi = weatherObject.DailyForecasts[0].Night.Icon;
-    }
+    conditions.innerHTML = weatherObject[0].IconPhrase;
+    iconFromWeatherApi = weatherObject[0].WeatherIcon;
 
     icon.setAttribute('src', `images/icons/${iconFromWeatherApi}.svg`);
-}
-
-function whatHourIsIt() {
-    const date = new Date();
-    return date.getHours() + 1;
-}
-
-function dayNight(timeInHours) {
-    let timeSrc = null;
-    let time;
-    if(timeInHours >= 6 && timeInHours < 18) {
-        timeSrc = 'images/day.svg';
-        time = 'Day';
-    } else {
-        timeSrc = 'images/night.svg';
-        time = 'Night';
-    }
-    dayOrNight.setAttribute('src', timeSrc);
-
-    return time;
 }
