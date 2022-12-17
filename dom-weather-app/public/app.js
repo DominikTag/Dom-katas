@@ -20,7 +20,7 @@ cityInput.addEventListener('keyup', () => {
 
 async function getCity (inputValue) {
 
-    const base = 'http://dataservice.accuweather.com/locations/v1/cities/search';
+    const base = 'https://dataservice.accuweather.com/locations/v1/cities/search';
     const query = `?apikey=${apiKey}&q=${inputValue}`;
 
     const response = await fetch(base + query)
@@ -34,7 +34,7 @@ async function getCity (inputValue) {
 }
 
 async function getWeather (cityKey) {
-    const base = 'http://dataservice.accuweather.com/forecasts/v1/hourly/1hour/';
+    const base = 'https://dataservice.accuweather.com/forecasts/v1/hourly/1hour/';
     const query = `${cityKey}?apikey=${apiKey}`;
 
     const response = await fetch(base + query)
