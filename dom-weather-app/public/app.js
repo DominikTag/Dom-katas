@@ -4,8 +4,8 @@ const startButton = document.querySelector('#startButton');
 const apiKey = 'kUfkPA9VVU5407oDJWDoh2T10ZALToRm';
 
 const allWeatherInformation = async () => {
-    const cityDetails = await getCity(cityInput.value);
-    const weatherConditions = await getWeather(cityDetails.cityID);
+    const cityId = await getCity(cityInput.value);
+    const weatherConditions = await getWeather(cityId);
 
     return {
         isDay: weatherConditions[0].IsDaylight,
@@ -15,13 +15,10 @@ const allWeatherInformation = async () => {
     }
 }
 
+
 startButton.addEventListener('click', async () => {
-    updateUI(
-        (await allWeatherInformation()).isDay,
-        (await allWeatherInformation()).temperatureInFahrenheits,
-        (await allWeatherInformation()).iconPhrase,
-        (await allWeatherInformation()).weatherIcon
-    );
+    const weatherData = await allWeatherInformation();
+    updateUI(weatherData);
 })
 
 
@@ -36,7 +33,7 @@ async function getCity (inputValue) {
         })
     const data = await response.json();
 
-    return {cityID: data[0].Key};
+    return data[0].Key;
 
 }
 
@@ -53,11 +50,12 @@ async function getWeather (cityKey) {
     return weatherData;
 }
 
-function updateUI(isDay, temperatureInFahrenheits, iconPhrase, weatherIcon) {
-    changeBackground(isDay);
-    updateTemperature(fahrenheitToCelsius(temperatureInFahrenheits));
-    updateWeatherConditionsAndIcons(iconPhrase, weatherIcon);
+function updateUI(weatherObject) {
+    changeBackground(weatherObject.isDay);
+    updateTemperature(fahrenheitToCelsius(weatherObject.temperatureInFahrenheits));
+    updateWeatherConditionsAndIcons(weatherObject.iconPhrase, weatherObject.weatherIcon);
 }
+
 
 function changeBackground (isDayTime) {
 
@@ -73,13 +71,13 @@ function changeBackground (isDayTime) {
 function updateTemperature (valueInCelsius) {
     const temperature = document.querySelector('.temperature');
 
-    temperature.innerHTML = `${valueInCelsius}&deg;C`;
+    temperature.innerHTML = `${valueInCelsius.toFixed(0)}&deg;C`;
 }
 
 function fahrenheitToCelsius (valueInFahrenheit) {
     let fahrenheitTemperature = parseFloat(valueInFahrenheit);
 
-    return (Math.round(fahrenheitTemperature - 32) / 1.8).toFixed(0);
+    return (Math.round(fahrenheitTemperature - 32) / 1.8);
 }
 
 function updateWeatherConditionsAndIcons (iconPhrase, weatherIcon) {
