@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="450" height="380" viewBox="0 0 450 380">
   <defs>
     <clipPath id="clip-night">
-      <rect width="414" height="415"/>
+      <rect width="414" height="365"/>
     </clipPath>
   </defs>
   <g id="night" clip-path="url(#clip-night)">

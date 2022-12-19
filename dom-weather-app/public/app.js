@@ -1,22 +1,29 @@
 const cityInput = document.querySelector('#city-input');
-const temperature = document.querySelector('.temperature');
-const background = document.querySelector('.background');
-const conditions = document.querySelector('.conditions');
-const icon = document.querySelector('.weather-icon');
+const startButton = document.querySelector('#startButton');
 
-const apiKey = 'EPdJhXaeSuuAyzPqHlQcJboQyVosCoFQ';
+const apiKey = 'kUfkPA9VVU5407oDJWDoh2T10ZALToRm';
 
-let timeout = null;
+const allWeatherInformation = async () => {
+    const cityDetails = await getCity(cityInput.value);
+    const weatherConditions = await getWeather(cityDetails.cityID);
 
-cityInput.addEventListener('keyup', () => {
-    clearTimeout(timeout);
+    return {
+        isDay: weatherConditions[0].IsDaylight,
+        temperatureInFahrenheits: weatherConditions[0].Temperature.Value,
+        iconPhrase: weatherConditions[0].IconPhrase,
+        weatherIcon: weatherConditions[0].WeatherIcon
+    }
+}
 
-    timeout = setTimeout(async function () {
-        const cityDetails = await getCity(cityInput.value);
-        const weatherObject = await getWeather(cityDetails.cityID);
-        updateUI(weatherObject);
-    }, 2000);
+startButton.addEventListener('click', async () => {
+    updateUI(
+        (await allWeatherInformation()).isDay,
+        (await allWeatherInformation()).temperatureInFahrenheits,
+        (await allWeatherInformation()).iconPhrase,
+        (await allWeatherInformation()).weatherIcon
+    );
 })
+
 
 async function getCity (inputValue) {
 
@@ -46,34 +53,40 @@ async function getWeather (cityKey) {
     return weatherData;
 }
 
-function updateUI(weatherObject) {
-    changeBackground(weatherObject);
-    updateTemperature(weatherObject);
-    updateWeatherConditionsAndIcons(weatherObject);
+function updateUI(isDay, temperatureInFahrenheits, iconPhrase, weatherIcon) {
+    changeBackground(isDay);
+    updateTemperature(fahrenheitToCelsius(temperatureInFahrenheits));
+    updateWeatherConditionsAndIcons(iconPhrase, weatherIcon);
 }
 
-function changeBackground (weatherObject) {
-    const isDay = weatherObject[0].IsDaylight;  // return true or false
+function changeBackground (isDayTime) {
 
-    if(isDay) {
+    const background = document.querySelector('.background');
+
+    if(isDayTime) {
         background.setAttribute('src', 'images/day.svg');
     } else {
         background.setAttribute('src', 'images/night.svg');
     }
 }
 
-function updateTemperature (weatherObject) {
-    let fahrenheitTemperature = parseFloat(weatherObject[0].Temperature.Value);
-    let celsius = (Math.round(fahrenheitTemperature - 32) / 1.8).toFixed(0);
+function updateTemperature (valueInCelsius) {
+    const temperature = document.querySelector('.temperature');
 
-    temperature.innerHTML = `${celsius}&deg;C`;
+    temperature.innerHTML = `${valueInCelsius}&deg;C`;
 }
 
-function updateWeatherConditionsAndIcons (weatherObject) {
-    let iconFromWeatherApi;
+function fahrenheitToCelsius (valueInFahrenheit) {
+    let fahrenheitTemperature = parseFloat(valueInFahrenheit);
 
-    conditions.innerHTML = weatherObject[0].IconPhrase;
-    iconFromWeatherApi = weatherObject[0].WeatherIcon;
+    return (Math.round(fahrenheitTemperature - 32) / 1.8).toFixed(0);
+}
 
-    icon.setAttribute('src', `images/icons/${iconFromWeatherApi}.svg`);
+function updateWeatherConditionsAndIcons (iconPhrase, weatherIcon) {
+    const conditions = document.querySelector('.conditions');
+    const icon = document.querySelector('.weather-icon');
+
+
+    conditions.innerHTML = iconPhrase;
+    icon.setAttribute('src', `images/icons/${weatherIcon}.svg`);
 }
