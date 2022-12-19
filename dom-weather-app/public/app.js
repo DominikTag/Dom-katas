@@ -1,7 +1,7 @@
 const cityInput = document.querySelector('#city-input');
 const startButton = document.querySelector('#startButton');
 
-const apiKey = 'kUfkPA9VVU5407oDJWDoh2T10ZALToRm';
+const apiKey = '9zb4wwoGFBeeSG5UonWlGPevCzCaXlRq';
 
 const allWeatherInformation = async () => {
     const cityId = await getCity(cityInput.value);
