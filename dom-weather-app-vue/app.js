@@ -15,7 +15,7 @@ const app = Vue.createApp({
         }
     },
     methods: {
-        async loading() {
+        async loadingOverlay() {
             const delay = ms => new Promise(res => setTimeout(res, ms));
             this.isLoading = true;
             await delay(1000);
