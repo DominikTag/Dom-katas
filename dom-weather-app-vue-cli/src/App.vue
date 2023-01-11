@@ -1,10 +1,10 @@
 <template>
-  <div class="flex items-center justify-center w-full h-full font-mono bg-slate-500" id="container">
-    <div class="rounded-md h-5/6 w-96 lg:max-w-1/5 bg-zinc-400 relative" :class="{ 'opacity-50': isLoading }">
-      <div id="heading" class="flex items-center justify-center w-full h-1/6">
+  <div class="flex items-center justify-center w-full h-full font-mono bg-slate-500">
+    <div class="rounded-md h-5/6 w-96 lg:max-w-1/5 bg-zinc-400 relative" :class="{ 'transition opacity-50 duration-500': isLoading }">
+      <div class="flex items-center justify-center w-full h-1/6">
         <h2>The best weather app</h2>
       </div>
-      <dayNight />
+      <BackgroundDayNight />
       <weatherInformation />
       <actionInput />
     </div>
@@ -12,18 +12,17 @@
 </template>
 
 <script>
-import dayNight from './components/dayNight.vue';
+import BackgroundDayNight from './components/BackgroundDayNight.vue';
 import weatherInformation from "@/components/weatherInformation.vue";
 import actionInput from "@/components/actionInput.vue";
-import store from './vuex/store.js';
 import './assets/tailwind.css';
 
 export default {
   name: 'App',
-  components: { dayNight, weatherInformation, actionInput },
+  components: { BackgroundDayNight, weatherInformation, actionInput },
   computed: {
     isLoading: function() {
-        return store.getters.isLoading;
+        return this.$store.state.isLoading;
     }
   }
 }

@@ -2,7 +2,7 @@ const apiKey = '9zb4wwoGFBeeSG5UonWlGPevCzCaXlRq';
 const cityBaseUrl = 'https://dataservice.accuweather.com/locations/v1/cities/search';
 const weatherBaseUrl = 'https://dataservice.accuweather.com/forecasts/v1/hourly/1hour/';
 
-const dataGetters = {
+const weatherAPI = {
     async getCityId(cityName) {
         const url = `${cityBaseUrl}?apikey=${apiKey}&q=${cityName}`;
 
@@ -33,4 +33,4 @@ const dataGetters = {
     }
 }
 
-export default dataGetters;
+export default weatherAPI;

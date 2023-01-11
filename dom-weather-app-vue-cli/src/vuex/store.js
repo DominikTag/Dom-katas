@@ -14,23 +14,12 @@ export default createStore({
             weatherInformation: {},
         }
     },
-    getters: {
-        getWeatherInformation(state) {
-            return state.weatherInformation;
-        },
-        isWeatherInformationVisible(state) {
-            return state.weatherInformationVisible;
-        },
-        isLoading(state) {
-            return state.isLoading;
-        }
-    },
     mutations: {
         setWeatherInformationVisible(state, newValue) {
             state.weatherInformationVisible = newValue;
         },
-        async updateWeatherInformation(state, newValue) {
-            state.weatherInformation = await newValue;
+        updateWeatherInformation(state, newValue) {
+            state.weatherInformation = newValue;
         },
         setIsLoading(state, newValue) {
             state.isLoading = newValue;

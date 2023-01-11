@@ -1,5 +1,5 @@
 <template>
-  <div id="action-button" class="w-full h-1/6 flex items-center justify-center absolute bottom-0">
+  <div class="w-full h-1/6 flex items-center justify-center absolute bottom-0">
     <input
         v-model="inputValue"
         @keyup.enter="loadAndDisplayNewData"
@@ -7,13 +7,12 @@
         class="h-1/3 w-4/5 text-sm pl-2 rounded-md focus:outline-none"
         placeholder="Type city name and press enter"
     >
-    <p v-text="variable"></p>
   </div>
 </template>
 
 <script>
 import store from '../vuex/store.js';
-import dataGetters from "@/helpers/dataGetters";
+import weatherAPI from "@/helpers/weatherAPI";
   export default {
     name: 'actionInput',
     data() {
@@ -30,12 +29,12 @@ import dataGetters from "@/helpers/dataGetters";
           await this.setWeatherInfoIsVisible();
 
           store.commit('setIsLoading', false);
-        }, 1000);
+        }, 500);
 
       },
       async updateWeatherInformation() {
-        const cityId = await dataGetters.getCityId(this.inputValue);
-        const weatherInfo = await dataGetters.getWeatherInformation(cityId);
+        const cityId = await weatherAPI.getCityId(this.inputValue);
+        const weatherInfo = await weatherAPI.getWeatherInformation(cityId);
 
         store.commit('updateWeatherInformation', weatherInfo);
       },
